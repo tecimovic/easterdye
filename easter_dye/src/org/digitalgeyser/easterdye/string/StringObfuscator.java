@@ -1,6 +1,6 @@
 // Copyright 2018 Silicon Laboratories, Inc.
 
-package org.digitalgeyser.string_obfuscator;
+package org.digitalgeyser.easterdye.string;
 
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -13,7 +13,7 @@ public class StringObfuscator {
     // Do it.
     String myLoc = "/home/timotej/git/easterdye/easter_dye/";
     Path inputFile = Paths.get(myLoc + "pony.txt");
-    Path outputJavaFile = Paths.get(myLoc + "src/org/digitalgeyser/string_obfuscator/X.java");
+    Path outputJavaFile = Paths.get(myLoc + "src/org/digitalgeyser/easterdye/string/X.java");
     obfuscate(inputFile, outputJavaFile, new ZipMethod());
 
     // Test it.

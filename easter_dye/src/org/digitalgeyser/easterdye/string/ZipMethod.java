@@ -1,6 +1,6 @@
 // Copyright 2018 Silicon Laboratories, Inc.
 
-package org.digitalgeyser.string_obfuscator;
+package org.digitalgeyser.easterdye.string;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -52,7 +52,7 @@ public class ZipMethod implements IStringObfuscationMethod {
   @Override
   public String[] classContentForDecoder(final String className, final byte[] data) {
     String [] code = {
-"package org.digitalgeyser.string_obfuscator;",
+"package org.digitalgeyser.easterdye.string;",
 "",
 "import java.io.ByteArrayInputStream;",
 "import java.util.zip.ZipInputStream;",

@@ -1,4 +1,4 @@
-package org.digitalgeyser.string_obfuscator;
+package org.digitalgeyser.easterdye.string;
 
 import java.io.ByteArrayInputStream;
 import java.util.zip.ZipInputStream;
