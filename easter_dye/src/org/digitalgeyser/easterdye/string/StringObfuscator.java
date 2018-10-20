@@ -5,24 +5,20 @@ package org.digitalgeyser.easterdye.string;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
+/**
+ * Toplevel API for string embedding and obfuscation.
+ * This is how you get strings into the java code without being obvious.
+ *
+ * Created on Oct 20, 2018
+ * @author Timotej Ecimovic
+ */
 public class StringObfuscator {
 
-  public static void main(final String[] args) {
-    // Do it.
-    String myLoc = "/home/timotej/git/easterdye/easter_dye/";
-    Path inputFile = Paths.get(myLoc + "pony.txt");
-    Path outputJavaFile = Paths.get(myLoc + "src/org/digitalgeyser/easterdye/string/X.java");
-    obfuscate(inputFile, outputJavaFile, new ZipMethod());
-
-    // Test it.
-    System.err.println(X.x());
-  }
-
-  private static void obfuscate(final Path inputTextFile,
-                                final Path outputJavaFile,
-                                final IStringObfuscationMethod method) {
+  public static void obfuscate(final Path inputTextFile,
+                               final Path outputJavaFile,
+                               final String packageName,
+                               final IStringObfuscationMethod method) {
     try {
       String className = outputJavaFile.getFileName().toString().replace(".java", "");
       // Read
@@ -30,7 +26,7 @@ public class StringObfuscator {
       // Transform
       byte[] transformedArray = method.encodeData(buffer, buffer.length);
       // Create output code
-      String[] code = method.classContentForDecoder(className, transformedArray);
+      String[] code = method.classContentForDecoder(packageName, className, transformedArray);
 
       try (PrintWriter pw = new PrintWriter(outputJavaFile.toFile())) {
 

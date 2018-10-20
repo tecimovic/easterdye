@@ -50,14 +50,16 @@ public class ZipMethod implements IStringObfuscationMethod {
 
 
   @Override
-  public String[] classContentForDecoder(final String className, final byte[] data) {
+  public String[] classContentForDecoder(final String packageName,
+                                         final String className,
+                                         final byte[] data) {
     String [] code = {
-"package org.digitalgeyser.easterdye.string;",
+(packageName != null ? "package " + packageName + ";" : ""),
 "",
 "import java.io.ByteArrayInputStream;",
 "import java.util.zip.ZipInputStream;",
 "",
-"class " + className + " {",
+"public class " + className + " {",
 "  private static final byte[] x = {",
  printByteArray(data, 4, 20),
 "  };",

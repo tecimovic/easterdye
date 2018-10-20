@@ -1,9 +1,9 @@
-package org.digitalgeyser.easterdye.string;
+package gen;
 
 import java.io.ByteArrayInputStream;
 import java.util.zip.ZipInputStream;
 
-class X {
+public class X {
   private static final byte[] x = {
     67,95,22,18,3,24,17,18,19,28,19,20,52,22,23,24,25,26,27,28,
     19,20,21,22,23,24,25,26,18,28,70,64,16,22,22,20,25,26,27,-119,
