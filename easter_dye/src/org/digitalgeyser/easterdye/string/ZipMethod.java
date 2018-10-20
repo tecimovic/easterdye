@@ -8,6 +8,16 @@ import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+/**
+ * Mechanism for obfuscating that essentially zips up the string, obfuscates it
+ * with a simple one-byte hash, and stores it as a byte[] block of the resulting
+ * data.
+ *
+ * Deobfuscator simply reverts the process.
+ *
+ * Created on Oct 20, 2018
+ * @author Timotej Ecimovic
+ */
 public class ZipMethod implements IStringObfuscationMethod {
 
   @Override

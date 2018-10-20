@@ -35,8 +35,6 @@ public class StringObfuscator {
         for ( String line: code ) {
           pw.println(line);
         }
-        System.out.println("Lenght of original array: " + buffer.length);
-        System.out.println("Length of obfuscated array: " + transformedArray.length);
         pw.flush();
       }
 
