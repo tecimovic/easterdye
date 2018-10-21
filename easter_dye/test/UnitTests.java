@@ -1,3 +1,5 @@
+// Copyright 2018 Digital Geyser.
+
 import java.lang.reflect.Method;
 import java.util.Random;
 

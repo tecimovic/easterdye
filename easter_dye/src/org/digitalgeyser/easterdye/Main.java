@@ -1,3 +1,5 @@
+// Copyright 2018 Digital Geyser.
+
 package org.digitalgeyser.easterdye;
 
 import java.io.PrintStream;

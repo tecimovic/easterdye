@@ -1,3 +1,5 @@
+// Copyright 2018 Digital Geyser.
+
 import org.digitalgeyser.easterdye.Main;
 
 import gen.X;
