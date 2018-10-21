@@ -4,6 +4,7 @@ package org.digitalgeyser.easterdye.string;
 
 import java.io.IOException;
 import java.util.zip.Deflater;
+import java.util.zip.Inflater;
 
 import org.digitalgeyser.easterdye.Utility;
 
@@ -26,11 +27,29 @@ public class DeflateMethod implements IStringObfuscationMethod {
     d.finish();
     byte[] output = new byte[buffer.length];
     int n = d.deflate(output);
+    d.end();
     byte[] transformedArray = new byte[n];
     System.arraycopy(output, 0, transformedArray, 0, n);
     return transformedArray;
   }
 
+  public static String content(final int[] x) {
+    try {
+      int l = x[0];
+      byte[] b = new byte[l];
+      for ( int i=0; i<l; i++ ) {
+        b[i] = (byte)((x[i/4+1] >> (8*(3-i%4))) & (0x000000FF));
+      }
+      Inflater d = new Inflater();
+      byte[] out = new byte[b.length * 10];
+      d.setInput(b);
+      d.inflate(out);
+      d.end();
+      return new String(out);
+    } catch(Exception e) {
+      throw new IllegalStateException();
+    }
+  }
 
   @Override
   public String[] classContentForDecoder(final String packageName,
@@ -46,7 +65,7 @@ public class DeflateMethod implements IStringObfuscationMethod {
 Utility.printIntArray(data, 4, 6),
 "  };",
 "",
-"  public static String x() {",
+"  public static String string() {",
 "    try {",
 "      int l = x[0];",
 "      byte[] b = new byte[l];",

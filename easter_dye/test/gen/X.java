@@ -47,7 +47,7 @@ public class X {
     1373269933,-496280897,-1095637526,2146478014,1996488704,
   };
 
-  public static String x() {
+  public static String string() {
     try {
       int l = x[0];
       byte[] b = new byte[l];

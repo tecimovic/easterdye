@@ -11,6 +11,6 @@ public class MainTest {
     String outputJavaFile = myLoc + "test/gen/X.java";
 
     Main.main(new String[] {inputFile, outputJavaFile, "gen"});
-    System.out.println(X.x());
+    System.out.println(X.string());
   }
 }
