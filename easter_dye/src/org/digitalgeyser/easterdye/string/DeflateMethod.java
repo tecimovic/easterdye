@@ -26,28 +26,7 @@ public class DeflateMethod implements IStringObfuscationMethod {
     int n = d.deflate(output);
     byte[] transformedArray = new byte[n];
     System.arraycopy(output, 0, transformedArray, 0, n);
-    for ( int i=0; i<transformedArray.length; i++ ) {
-      transformedArray[i] ^= (0x13+i%10);
-    }
     return transformedArray;
-  }
-
-  private static String printByteArray(final byte[] bytes, final int ident, final int perRow) {
-    StringBuilder barr = new StringBuilder();
-    int n = 0;
-    StringBuilder identS = new StringBuilder();
-    for ( int i=0; i<ident; i++ )
-      identS.append(' ');
-    barr.append(identS);
-    for ( byte b: bytes ) {
-      barr.append(b + ",");
-      n++;
-      if ( n%perRow == 0 ) {
-        barr.append("\n");
-        barr.append(identS);
-      }
-    }
-    return barr.toString();
   }
 
 
@@ -61,17 +40,20 @@ public class DeflateMethod implements IStringObfuscationMethod {
 "import java.util.zip.Inflater;",
 "",
 "public class " + className + " {",
-"  private static final byte[] x = {",
- printByteArray(data, 4, 20),
+"  private static final int[] x = {",
+StringObfuscator.printIntArray(data, 4, 6),
 "  };",
 "",
 "  public static String x() {",
 "    try {",
-"      for(int i=0; i<x.length; i++)",
-"        x[i] ^= (0x13+i%10);",
+"      int l = x[0];",
+"      byte[] b = new byte[l];",
+"      for ( int i=0; i<l; i++ ) {",
+"        b[i] = (byte)((x[i/4+1] >> (8*(3-i%4))) & (0x000000FF));",
+"      }",
 "      Inflater d = new Inflater();",
-"      byte[] out = new byte[x.length * 10];",
-"      d.setInput(x);",
+"      byte[] out = new byte[b.length * 10];",
+"      d.setInput(b);",
 "      d.inflate(out);",
 "      d.end();",
 "      return new String(out);",
