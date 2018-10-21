@@ -17,7 +17,7 @@ public interface IStringObfuscationMethod {
    *
    * @returns byte[]
    */
-  public byte[] encodeData(final byte[] buffer, final int len) throws IOException;
+  public byte[] encodeData(final byte[] buffer) throws IOException;
 
   /**
    * This method outputs the source code for a decoder class.

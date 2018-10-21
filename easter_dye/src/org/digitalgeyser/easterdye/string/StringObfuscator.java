@@ -24,7 +24,8 @@ public class StringObfuscator {
       // Read
       byte[] buffer = Files.readAllBytes(inputTextFile);
       // Transform
-      byte[] transformedArray = method.encodeData(buffer, buffer.length);
+      byte[] transformedArray = method.encodeData(buffer);
+      //System.err.println("Input: " + buffer.length + ", output: " + transformedArray.length);
       // Create output code
       String[] code = method.classContentForDecoder(packageName, className, transformedArray);
 

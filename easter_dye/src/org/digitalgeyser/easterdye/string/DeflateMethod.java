@@ -2,11 +2,8 @@
 
 package org.digitalgeyser.easterdye.string;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.zip.Deflater;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 /**
  * Mechanism for obfuscating that essentially zips up the string, obfuscates it
@@ -18,22 +15,17 @@ import java.util.zip.ZipOutputStream;
  * Created on Oct 20, 2018
  * @author Timotej Ecimovic
  */
-public class ZipMethod implements IStringObfuscationMethod {
+public class DeflateMethod implements IStringObfuscationMethod {
 
   @Override
-  public byte[] encodeData(final byte[] buffer, final int len) throws IOException {
-    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    ZipOutputStream zos = new ZipOutputStream(baos);
-    zos.setLevel(Deflater.BEST_COMPRESSION);
-    ZipEntry newEntry = new ZipEntry("");
-    newEntry.setTime(12345);
-    zos.putNextEntry(newEntry);
-    for ( int i=0; i<len; i++ ) {
-      zos.write(buffer[i]);
-    }
-    zos.closeEntry();
-    zos.close();
-    byte[] transformedArray = baos.toByteArray();
+  public byte[] encodeData(final byte[] buffer) throws IOException {
+    Deflater d = new Deflater();
+    d.setInput(buffer);
+    d.finish();
+    byte[] output = new byte[buffer.length];
+    int n = d.deflate(output);
+    byte[] transformedArray = new byte[n];
+    System.arraycopy(output, 0, transformedArray, 0, n);
     for ( int i=0; i<transformedArray.length; i++ ) {
       transformedArray[i] ^= (0x13+i%10);
     }
@@ -66,8 +58,7 @@ public class ZipMethod implements IStringObfuscationMethod {
     String [] code = {
 (packageName != null ? "package " + packageName + ";" : ""),
 "",
-"import java.io.ByteArrayInputStream;",
-"import java.util.zip.ZipInputStream;",
+"import java.util.zip.Inflater;",
 "",
 "public class " + className + " {",
 "  private static final byte[] x = {",
@@ -76,17 +67,14 @@ public class ZipMethod implements IStringObfuscationMethod {
 "",
 "  public static String x() {",
 "    try {",
-"      StringBuilder s=new StringBuilder();",
 "      for(int i=0; i<x.length; i++)",
 "        x[i] ^= (0x13+i%10);",
-"      ZipInputStream z = new ZipInputStream(new ByteArrayInputStream(x));",
-"      z.getNextEntry();",
-"      int b;",
-"      while((b=z.read())!=-1) {",
-"        s.append((char)b);",
-"      }",
-"      z.close();",
-"      return s.toString();",
+"      Inflater d = new Inflater();",
+"      byte[] out = new byte[x.length * 10];",
+"      d.setInput(x);",
+"      d.inflate(out);",
+"      d.end();",
+"      return new String(out);",
 "    } catch(Exception e) {",
 "      throw new IllegalStateException();",
 "    }",
