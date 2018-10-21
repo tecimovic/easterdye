@@ -3,6 +3,8 @@ package org.digitalgeyser.easterdye.string;
 import java.io.IOException;
 import java.util.zip.Deflater;
 
+import org.digitalgeyser.easterdye.Utility;
+
 /**
  * Mechanism for obfuscating that essentially zips up the string, obfuscates it
  * with a simple one-byte hash, and stores it as a byte[] block of the resulting
@@ -39,7 +41,7 @@ public class DeflateMethod implements IStringObfuscationMethod {
 "",
 "public class " + className + " {",
 "  private static final int[] x = {",
-StringObfuscator.printIntArray(data, 4, 6),
+Utility.printIntArray(data, 4, 6),
 "  };",
 "",
 "  public static String x() {",
