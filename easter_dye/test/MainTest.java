@@ -1,9 +1,6 @@
 import org.digitalgeyser.easterdye.Main;
 
 import gen.X;
-
-// Copyright 2018 Silicon Laboratories, Inc.
-
 public class MainTest {
   public static void main(final String[] args) {
     // Do it.

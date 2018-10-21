@@ -1,5 +1,3 @@
-// Copyright 2018 Silicon Laboratories, Inc.
-
 package org.digitalgeyser.easterdye.string;
 
 import java.io.IOException;

@@ -1,7 +1,4 @@
 import org.digitalgeyser.easterdye.string.StringObfuscator;
-
-// Copyright 2018 Silicon Laboratories, Inc.
-
 public class UnitTests {
 
   public static void main(final String[] args) {
